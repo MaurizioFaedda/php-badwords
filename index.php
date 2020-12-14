@@ -15,8 +15,13 @@
     $replace = "***";
 
     // risultato finale: nuovo paragrafo con censura
+    // Tutti i caratteri dopo il punto tornano maiuscoli
     $new_paragraph = str_replace($final_badword, $replace, $lower_paragraph);
-
+    preg_match_all("/\.\s*\w/", $new_paragraph, $matches);
+    foreach($matches[0] as $match){
+    $new_paragraph = str_replace($match, strtoupper($match), $new_paragraph);
+    }
+    // La prima lettera torna maiuscola
     $final_paragraph = ucfirst($new_paragraph);
 
     // lunghezza del paragrafo originale
