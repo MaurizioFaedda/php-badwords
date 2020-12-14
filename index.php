@@ -2,14 +2,22 @@
 // scrivo le mie variabili
     $paragraph = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
 
+    // rendo tutte le parole in minuscolo in modo da poter nascondere anche parola con la lettera maiuscola
+    $lower_paragraph = strtolower($paragraph);
+
+
     // badword
     $my_badword = $_GET['badword'];
+    // leggo la badword in minuscolo a presceindere da quello che l'utente scrive
+    $final_badword = strtolower($my_badword);
 
     // con cosa voglio rimpiazzare
     $replace = "***";
 
     // risultato finale: nuovo paragrafo con censura
-    $new_paragraph = str_replace($my_badword, $replace, $paragraph);
+    $new_paragraph = str_replace($final_badword, $replace, $lower_paragraph);
+
+    $final_paragraph = ucfirst($new_paragraph);
 
     // lunghezza del paragrafo originale
     $strlen_paragraph = strlen($paragraph);
@@ -29,7 +37,7 @@
         <h2>Censured paragraph</h2>
 
         <!-- stampo il paragrafo censurato -->
-        <p> <?php echo $new_paragraph ?></p>
+        <p> <?php echo $final_paragraph ?></p>
 
         <h3>Original paragraph length vs New paragraph length</h3>
         <p> Il paragrafo senza censure contiene
@@ -47,7 +55,7 @@
         <h2>Censured paragraph</h2>
 
         <!-- stampo il paragrafo censurato -->
-        <p> <?php var_dump($new_paragraph) ?></p>
+        <p> <?php var_dump($final_paragraph) ?></p>
 
         <h3>Original paragraph length vs New paragraph length</h3>
         <p> Il paragrafo senza censure contiene
